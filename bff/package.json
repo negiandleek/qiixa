@@ -18,9 +18,13 @@
   },
   "devDependencies": {
     "@types/cookie-session": "^2.0.39",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "eslint": "^7.0.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.4",
     "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
     "ts-node": "^8.10.1"
   },
   "nodemonConfig": {
@@ -33,5 +37,16 @@
     ],
     "ext": "ts",
     "exec": "yarn start"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged --allow-empty"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
