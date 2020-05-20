@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "graphql": "^15.0.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "1.14.0",
+    "@graphql-codegen/near-operation-file-preset": "^1.14.0",
+    "@graphql-codegen/schema-ast": "^1.14.0",
+    "@graphql-codegen/typescript": "1.14.0",
+    "@graphql-codegen/typescript-operations": "1.14.0",
+    "@graphql-codegen/typescript-react-apollo": "1.14.0",
+    "@graphql-codegen/typescript-resolvers": "1.14.0"
+  },
+  "scripts": {
+    "gen": "graphql-codegen --watch"
+  }
+}
