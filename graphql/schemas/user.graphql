@@ -1,0 +1,11 @@
+extend type Query{
+  user(id: ID!): User
+}
+
+type User implements Node {
+  id: ID!
+  profileImage: String!
+  description: String
+  name: String
+  articles: [Article]!
+}

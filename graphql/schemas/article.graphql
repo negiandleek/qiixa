@@ -1,0 +1,8 @@
+type Article implements Node {
+  id: ID!
+  title: String!
+  url: String!
+  user: User
+  stockCounts: Int!
+  stockUser: [User]!
+}
