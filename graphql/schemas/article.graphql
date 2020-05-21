@@ -3,7 +3,7 @@ extend type Query{
     first: Int
     after: Int
     id: ID!
-  ): [Article]!
+  ): ArticleConnection!
 }
 
 type ArticleConnection {
@@ -12,7 +12,6 @@ type ArticleConnection {
 }
 
 type ArticleEdge {
-  cursor: String!
   node: Article!
 }
 

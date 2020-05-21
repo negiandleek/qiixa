@@ -4,12 +4,22 @@ import { ContextType } from "./";
 export const articleResolver: Resolvers<ContextType> = {
   Query: {
     async articles(_: any, { id, first, after }, { dataSources }) {
-      const { data } = await dataSources.article.getArticlesByUser(
+      const { data, pageInfo } = await dataSources.article.getArticlesByUser(
         id,
         first,
         after
       );
-      return data;
+      return {
+        edges: data.map((item: any) => {
+          return {
+            node: item,
+          };
+        }),
+        pageInfo: {
+          hasNextPage: pageInfo.hasNext,
+          hasPreviousPage: pageInfo.hasPrev,
+        },
+      };
     },
   },
 };
