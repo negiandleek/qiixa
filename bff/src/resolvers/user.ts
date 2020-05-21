@@ -1,10 +1,5 @@
 import { Resolvers } from "../generated/graphql-resolver-types";
-import { DataSources } from "../datasource";
-
-interface ContextType {
-  // token: string
-  dataSources: DataSources;
-}
+import { ContextType } from "./";
 
 export const userResovler: Resolvers<ContextType> = {
   Query: {

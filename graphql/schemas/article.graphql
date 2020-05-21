@@ -1,8 +1,26 @@
+extend type Query{
+  articles(
+    first: Int
+    after: Int
+    id: ID!
+  ): [Article]!
+}
+
+type ArticleConnection {
+  pageInfo: PageInfo
+  edges: [ArticleEdge!]!
+}
+
+type ArticleEdge {
+  cursor: String!
+  node: Article!
+}
+
 type Article implements Node {
   id: ID!
-  title: String!
-  url: String!
-  user: User
-  stockCounts: Int!
+  title: String
+  url: String
+  user: User!
+  stockCounts: Int
   stockUser: [User]!
 }

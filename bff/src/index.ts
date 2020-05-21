@@ -20,6 +20,10 @@ const server = new ApolloServer({
   typeDefs,
   resolvers: resolvers as any,
   dataSources: createDataSources,
+  formatError: (err) => {
+    console.error(err);
+    return err;
+  },
 });
 server.applyMiddleware({ app });
 app.use(bodyParser());
