@@ -5,6 +5,9 @@ import path from "path";
 import cookieSession from "cookie-session";
 import { errorHandler } from "./errorHandler";
 import bodyParser from "body-parser";
+import { createDataSources } from "./datasource/";
+import { resolvers } from "./resolvers/";
+
 const key =
   process.env.COOKIE_KEY ||
   fs.readFileSync(path.join(__dirname, "./__secret")).toString();
@@ -13,7 +16,11 @@ const typeDefs = gql(
   fs.readFileSync(path.join(__dirname, "./generated/schema.graphql")).toString()
 );
 const app = express();
-const server = new ApolloServer({ typeDefs });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers: resolvers as any,
+  dataSources: createDataSources,
+});
 server.applyMiddleware({ app });
 app.use(bodyParser());
 app.use(

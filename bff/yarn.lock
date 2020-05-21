@@ -483,6 +483,25 @@ apollo-cache-control@^0.10.1-alpha.0:
     apollo-server-env "^2.4.4-alpha.0"
     graphql-extensions "^0.12.1-alpha.0"
 
+apollo-datasource-rest@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/apollo-datasource-rest/-/apollo-datasource-rest-0.9.0.tgz#20075ecee76c218930f9af5ba0e783023111b217"
+  integrity sha512-UeukRXbuamqhe1P6f0/vVE8iHE4VOWTUULJrDVBysJmw4kMH2kGdc8tlqJGFStmCUtazW0CgWmvpJIPv9Va4kg==
+  dependencies:
+    apollo-datasource "^0.7.0"
+    apollo-server-caching "^0.5.1"
+    apollo-server-env "^2.4.3"
+    apollo-server-errors "^2.4.1"
+    http-cache-semantics "^4.0.0"
+
+apollo-datasource@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/apollo-datasource/-/apollo-datasource-0.7.0.tgz#2a6d82edb2eba21b4ddf21877009ba39ff821945"
+  integrity sha512-Yja12BgNQhzuFGG/5Nw2MQe0hkuQy2+9er09HxeEyAf2rUDIPnhPrn1MDoZTB8MU7UGfjwITC+1ofzKkkrZobA==
+  dependencies:
+    apollo-server-caching "^0.5.1"
+    apollo-server-env "^2.4.3"
+
 apollo-datasource@^0.7.1-alpha.0:
   version "0.7.1-alpha.0"
   resolved "https://registry.yarnpkg.com/apollo-datasource/-/apollo-datasource-0.7.1-alpha.0.tgz#2e8f3b1b0846a8bc13bca614185a552eda03152b"
@@ -574,6 +593,14 @@ apollo-server-core@^2.13.1:
     sha.js "^2.4.11"
     subscriptions-transport-ws "^0.9.11"
     ws "^6.0.0"
+
+apollo-server-env@^2.4.3:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/apollo-server-env/-/apollo-server-env-2.4.3.tgz#9bceedaae07eafb96becdfd478f8d92617d825d2"
+  integrity sha512-23R5Xo9OMYX0iyTu2/qT0EUb+AULCBriA9w8HDfMoChB8M+lFClqUkYtaTTHDfp6eoARLW8kDBhPOBavsvKAjA==
+  dependencies:
+    node-fetch "^2.1.2"
+    util.promisify "^1.0.0"
 
 apollo-server-env@^2.4.4-alpha.0:
   version "2.4.4-alpha.0"
