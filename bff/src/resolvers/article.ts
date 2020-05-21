@@ -26,5 +26,8 @@ export const articleResolver: Resolvers<ContextType> = {
     user(parent, _, { dataSources }) {
       return dataSources.user.enrichUser(parent.user);
     },
+    stockCounts(parent, _, { dataSources }) {
+      return dataSources.stock.getStocksByArticleId(parent.id);
+    },
   },
 };

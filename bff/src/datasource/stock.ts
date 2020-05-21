@@ -20,6 +20,6 @@ export class Stock extends RESTDataSource<any> {
   }
   async getStocksByArticleId(articleId: string) {
     const { totalCountHeader } = await this.get(`items/${articleId}/stockers`);
-    return { stockCounts: totalCountHeader };
+    return totalCountHeader;
   }
 }

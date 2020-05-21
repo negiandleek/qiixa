@@ -3,8 +3,11 @@ import { ContextType } from ".";
 
 export const stockResolver: Resolvers<ContextType> = {
   Query: {
-    stocks(_: any, { id }, { dataSources }) {
-      return dataSources.stock.getStocksByArticleId(id);
+    async stocks(_: any, { id }, { dataSources }) {
+      const stockCounts = await dataSources.stock.getStocksByArticleId(id);
+      return {
+        stockCounts,
+      };
     },
   },
 };
