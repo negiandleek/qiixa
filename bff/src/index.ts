@@ -15,8 +15,6 @@ const typeDefs = gql(
 const app = express();
 const server = new ApolloServer({ typeDefs });
 server.applyMiddleware({ app });
-
-app.use(errorHandler);
 app.use(bodyParser());
 app.use(
   cookieSession({
@@ -27,7 +25,7 @@ app.use(
   })
 );
 
-app.post("/signin", function (req, res) {
+app.post("/api/signin", function (req, res) {
   if (req.body.token) {
     req.session = {
       token: req.body.token,
@@ -36,6 +34,7 @@ app.post("/signin", function (req, res) {
   res.sendStatus(200);
 });
 
+app.use(errorHandler);
 app.listen({ port: 4000 }, () =>
   console.log(`🚀 Server ready at http://localhost:4000`)
 );

@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, FormEvent } from 'react'
+import axios from 'axios'
 
 function Signin() {
-  const [password, setPassword] = useState("")
-  const handleSubmit = (e) => {
+  const [token, setToken] = useState("")
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    axios.post('/api/signin', {
+      token
+    }).then(()=>{
+      console.log('success')
+    }).catch(()=>{
+      console.log('error')
+    })
   }
   return (
     <div>
@@ -12,9 +20,8 @@ function Signin() {
       </p>
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <legend>Fieldset</legend>
           <label htmlFor="token">トークン</label>
-          <input type="password" name="token" value={password} onChange={e => setPassword(e.target.value)}/>
+          <input type="password" name="token" value={token} onChange={e => setToken(e.target.value)}/>
           <button type="submit">送信</button>
         </fieldset>
       </form>

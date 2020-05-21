@@ -6,16 +6,17 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+const proxyMiddleware = require('http-proxy-middleware')
+
 app.prepare().then(() => {
     const server = express();
 
     server.use(
-        '/graphql',
-        createProxyMiddleware({
-          target: 'localhost:4000',
-          changeOrigin: true,
-        }),
-    );
+      proxyMiddleware(['/graphql', '/api/signin'], {
+        target: 'http://localhost:4000',
+        changeOrigin: true
+      })
+    )
 
     server.all('*', (req, res) => {
       return handle(req, res)
