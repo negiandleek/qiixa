@@ -1,0 +1,7 @@
+extend type Query{
+  stocks(id: ID!): Sotck
+}
+
+type Sotck{
+  stockCounts: Int
+}

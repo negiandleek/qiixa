@@ -1,4 +1,4 @@
-import { RESTDataSource } from "apollo-datasource-rest";
+import { RESTDataSource, Response } from "apollo-datasource-rest";
 import { baseURL } from "./config";
 
 export class Stock extends RESTDataSource<any> {
@@ -6,19 +6,20 @@ export class Stock extends RESTDataSource<any> {
     super();
     this.baseURL = baseURL;
   }
-  static enrichStock(planData: any) {
-    console.log(planData);
-    return {
-      stockCounts: 0,
-      stockUser: [],
-    };
+  protected async didReceiveResponse<TResult = any>(
+    response: Response
+  ): Promise<TResult> {
+    if (response.ok) {
+      const totalCountHeader = response.headers.get("Total-Count");
+      return (this.parseBody(response).then(() => ({
+        totalCountHeader,
+      })) as any) as Promise<TResult>;
+    } else {
+      throw await this.errorFromResponse(response);
+    }
   }
-  async getStocksByArticleId(articleId: string, first: number, after: number) {
-    const response = await this.get(`imtes/${articleId}/stockers`, {
-      page: first,
-      per_page: after,
-    });
-    console.warn(response.header);
-    return response.map((item: any) => Stock.enrichStock(item));
+  async getStocksByArticleId(articleId: string) {
+    const { totalCountHeader } = await this.get(`items/${articleId}/stockers`);
+    return { stockCounts: totalCountHeader };
   }
 }
