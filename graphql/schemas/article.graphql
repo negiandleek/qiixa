@@ -8,7 +8,7 @@ extend type Query{
 
 type ArticleConnection {
   pageInfo: PageInfo
-  edges: [ArticleEdge!]!
+  edges: [ArticleEdge]!
 }
 
 type ArticleEdge {
@@ -20,6 +20,6 @@ type Article implements Node {
   title: String
   url: String
   user: User!
-  stockCounts: Int
+  stockCounts: Int!
   stockUser: [User]!
 }

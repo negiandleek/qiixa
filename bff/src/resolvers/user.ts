@@ -3,6 +3,28 @@ import { ContextType } from "./";
 
 export const userResovler: Resolvers<ContextType> = {
   Query: {
-    user: (_: any, { id }, { dataSources }) => dataSources.user.getUserById(id),
+    user(_: any, { id }, { dataSources }) {
+      return dataSources.user.getUserById(id);
+    },
+  },
+  User: {
+    async articles(parent, { first = 0, after = 1 }, { dataSources }) {
+      const { data, pageInfo } = await dataSources.article.getArticlesByUser(
+        parent.id,
+        first,
+        after
+      );
+      return {
+        edges: data.map((item: any) => {
+          return {
+            node: item,
+          };
+        }),
+        pageInfo: {
+          hasNextPage: pageInfo.hasNext,
+          hasPreviousPage: pageInfo.hasPrev,
+        },
+      };
+    },
   },
 };

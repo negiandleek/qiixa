@@ -7,5 +7,5 @@ type User implements Node {
   profileImage: String!
   description: String
   name: String
-  articles: [Article]!
+  articles(first: Int after: Int): ArticleConnection!
 }

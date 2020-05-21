@@ -6,6 +6,7 @@ generates:
       - typescript
       - typescript-resolvers
     config:
+      defaultMapper: any
       maybeValue: T | undefined
       enumsAsTypes: true
   ../bff/src/generated/schema.graphql:

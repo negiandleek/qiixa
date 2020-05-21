@@ -6,17 +6,16 @@ export class UserAPI extends RESTDataSource<any> {
     super();
     this.baseURL = baseURL;
   }
-  static enrichUser(planData: any) {
+  enrichUser(planData: any) {
     return {
       id: planData.id,
       profileImage: planData.profile_image_url,
       description: planData.description || undefined,
       name: planData.name || undefined,
-      articles: [],
     };
   }
   async getUserById(userId: string) {
     const response = await this.get(`users/${userId}`);
-    return UserAPI.enrichUser(response);
+    return this.enrichUser(response);
   }
 }

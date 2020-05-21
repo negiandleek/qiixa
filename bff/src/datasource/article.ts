@@ -6,13 +6,12 @@ export class Article extends RESTDataSource<any> {
     super();
     this.baseURL = baseURL;
   }
-  static enrichArticle(planData: any) {
+  enrichArticle(planData: any) {
     return {
       id: planData.id,
       title: planData.title,
       url: planData.url,
-      stockCounts: 0,
-      stockUser: [],
+      user: planData.user,
     };
   }
   protected async didReceiveResponse<TResult = any>(
@@ -43,7 +42,7 @@ export class Article extends RESTDataSource<any> {
       page: after,
     });
     return {
-      data: body.map((item: any) => Article.enrichArticle(item)) || [],
+      data: body.map((item: any) => this.enrichArticle(item)) || [],
       pageInfo,
     };
   }

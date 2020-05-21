@@ -22,4 +22,9 @@ export const articleResolver: Resolvers<ContextType> = {
       };
     },
   },
+  Article: {
+    user(parent, _, { dataSources }) {
+      return dataSources.user.enrichUser(parent.user);
+    },
+  },
 };
