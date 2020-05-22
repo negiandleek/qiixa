@@ -4,8 +4,10 @@ import { useUserQuery } from "./query.generated";
 const Styled = () => (
   <style>{`
     .profileImage {
-      width: 120px;
-      height: 120px;
+      max-width: 120px;
+      max-height: 120px;
+      width: auto;
+      height: auto;
     }
     .article-list{
       background-color: var(--background);
