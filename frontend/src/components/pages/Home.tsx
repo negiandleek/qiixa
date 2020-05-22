@@ -3,6 +3,28 @@ import { useUserQuery } from "./query.generated";
 
 const Styled = () => (
   <style>{`
+    .skelton-user{
+      height: 180px;
+      width: 100%;
+      background: linear-gradient(-90deg, var(--background) 0%, var(--background-body) 50%, var(--background) 100%);
+      background-size: 400% 400%;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    .skelton-article{
+      height: 180px;
+      width: 100%;
+      background: linear-gradient(-90deg, var(--background) 0%, var(--background-body) 50%, var(--background) 100%);
+      background-size: 400% 400%;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0% {
+        background-position: 0% 0%;
+      }
+      100% {
+        background-position: -135% 0%;
+      }
+    }
     .profileImage {
       max-width: 120px;
       max-height: 120px;
@@ -69,6 +91,7 @@ export const Home = () => {
       {/* user info */}
       <div className="w-4/5 mx-auto my-8">
         {/* done fetch and exists user */}
+        {loading && !data?.user && <div className="skelton-user"></div>}
         {data?.user && (
           <div>
             <figure className="flex items-center">
@@ -99,13 +122,15 @@ export const Home = () => {
           ))}
         </ul>
       </div>
-      {!loading &&
-        data?.user?.articles.pageInfo?.hasNextPage &&
-        data?.user?.articles.edges.length !== 0 && (
-          <div className="w-4/5 mx-auto text-center">
+      {/* users articles */}
+      <div className="w-4/5 mx-auto text-center">
+        {loading && <div className="skelton-article" />}
+        {!loading &&
+          data?.user?.articles.pageInfo?.hasNextPage &&
+          data?.user?.articles.edges.length !== 0 && (
             <button onClick={handleFetchMore}>もっと見る</button>
-          </div>
-        )}
+          )}
+      </div>
     </main>
   );
 };
