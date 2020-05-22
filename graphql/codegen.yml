@@ -1,5 +1,6 @@
 overwrite: true
 schema: "./schemas/**/*.graphql"
+documents: "../frontend/src/**/*.graphql"
 generates:
   ../bff/src/generated/graphql-resolver-types.ts:
     plugins:

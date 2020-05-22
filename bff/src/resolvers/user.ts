@@ -8,7 +8,7 @@ export const userResovler: Resolvers<ContextType> = {
     },
   },
   User: {
-    async articles(parent, { first = 0, after = 1 }, { dataSources }) {
+    async articles(parent, { first = 1, after = 1 }, { dataSources }) {
       const { data, pageInfo } = await dataSources.article.getArticlesByUser(
         parent.id,
         first,
