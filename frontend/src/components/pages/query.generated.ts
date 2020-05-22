@@ -1,29 +1,32 @@
-import * as Types from '../../generated/api-types.generated';
+import * as Types from "../../generated/api-types.generated";
 
-import gql from 'graphql-tag';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import gql from "graphql-tag";
+import * as ApolloReactCommon from "@apollo/react-common";
+import * as ApolloReactHooks from "@apollo/react-hooks";
 
-export type UserQueryVariables = {};
+export type UserQueryVariables = {
+  id?: Types.Scalars["ID"];
+};
 
-
-export type UserQuery = (
-  { __typename?: 'Query' }
-  & { user?: Types.Maybe<(
-    { __typename?: 'User' }
-    & Pick<Types.User, 'id' | 'name'>
-  )> }
-);
-
+export type UserQuery = { __typename?: "Query" } & {
+  user?: Types.Maybe<
+    { __typename?: "User" } & Pick<
+      Types.User,
+      "id" | "name" | "profileImage" | "description"
+    >
+  >;
+};
 
 export const UserDocument = gql`
-    query User {
-  user(id: "youya66") {
-    id
-    name
+  query User($id: ID! = "youya66") {
+    user(id: $id) {
+      id
+      name
+      profileImage
+      description
+    }
   }
-}
-    `;
+`;
 
 /**
  * __useUserQuery__
@@ -37,15 +40,32 @@ export const UserDocument = gql`
  * @example
  * const { data, loading, error } = useUserQuery({
  *   variables: {
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useUserQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<UserQuery, UserQueryVariables>) {
-        return ApolloReactHooks.useQuery<UserQuery, UserQueryVariables>(UserDocument, baseOptions);
-      }
-export function useUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UserQuery, UserQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, baseOptions);
-        }
+export function useUserQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<UserQuery, UserQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<UserQuery, UserQueryVariables>(
+    UserDocument,
+    baseOptions
+  );
+}
+export function useUserLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    UserQuery,
+    UserQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<UserQuery, UserQueryVariables>(
+    UserDocument,
+    baseOptions
+  );
+}
 export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
 export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
-export type UserQueryResult = ApolloReactCommon.QueryResult<UserQuery, UserQueryVariables>;
+export type UserQueryResult = ApolloReactCommon.QueryResult<
+  UserQuery,
+  UserQueryVariables
+>;

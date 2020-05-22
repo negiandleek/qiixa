@@ -1,6 +1,8 @@
-query User{
-  user(id: "youya66"){
+query User($id: ID! = "youya66"){
+  user(id: $id){
     id
     name
+    profileImage
+    description
   }
 }

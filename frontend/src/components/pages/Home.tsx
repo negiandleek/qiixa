@@ -1,31 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useUserQuery } from "./query.generated";
 
+const Styled = () => (
+  <style jsx>{`
+    .profileImage {
+      width: 120px;
+      height: 120px;
+    }
+  `}</style>
+);
+
 export const Home = () => {
+  const [user, setUser] = useState("");
+  const { data } = useUserQuery();
   return (
-    <div className="md:flex">
-      <div className="md:flex-shrink-0">
-        <img
-          className="rounded-lg md:w-56"
-          src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=448&q=80"
-          alt="Woman paying for a purchase"
-        />
-      </div>
-      <div className="mt-4 md:mt-0 md:ml-6">
-        <div className="uppercase tracking-wide text-sm text-indigo-600 font-bold">
-          Marketing
+    <main className="w-full my-8">
+      <Styled />
+      <div className="w-4/5 m-auto">
+        <h1>Qiixa</h1>
+        <div className="flex">
+          <input
+            className="w-full"
+            type="text"
+            placeholder="youya66"
+            value={user}
+            onChange={(e) => setUser(e.target.value)}
+          />
+          <button className="ml-auto">search</button>
         </div>
-        <a
-          href="#"
-          className="block mt-1 text-lg leading-tight font-semibold text-gray-900 hover:underline"
-        >
-          Finding customers for your new business
-        </a>
-        <p className="mt-2 text-gray-600">
-          Getting a new business off the ground is a lot of hard work. Here are
-          five ideas you can use to find your first customers.
-        </p>
       </div>
-    </div>
+      {/* user info */}
+      <div className="w-4/5 mx-auto my-8">
+        {/* done fetch and exists user */}
+        {data && data.user && (
+          <div>
+            <figure className="flex items-center">
+              <img
+                className="profileImage rounded-full mr-auto"
+                src={data.user.profileImage}
+                alt="profile user"
+              />
+              <figcaption className="w-full ml-8">
+                <h2>{data.user.name ?? data.user.id}</h2>
+                {data.user.description && <p>{data.user.description}</p>}
+              </figcaption>
+            </figure>
+          </div>
+        )}
+      </div>
+    </main>
   );
 };
