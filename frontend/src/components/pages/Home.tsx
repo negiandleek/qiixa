@@ -38,7 +38,7 @@ const Styled = () => (
 );
 
 export const Home = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState("youya66");
   const [page, setPage] = useState(1);
   const { loading, data, refetch, fetchMore } = useUserQuery({
     notifyOnNetworkStatusChange: true,
@@ -75,7 +75,7 @@ export const Home = () => {
   };
 
   const isUserLoading = loading && data?.user?.id !== user;
-  const isArticleLoading = loading;
+  const isFetchMoreLoading = loading && data?.user?.articles.edges.length !== 0;
 
   return (
     <main className="w-full my-8">
@@ -86,7 +86,7 @@ export const Home = () => {
           <input
             className="w-full"
             type="text"
-            placeholder="youya66"
+            placeholder="userid"
             value={user}
             onChange={(e) => setUser(e.target.value)}
           />
@@ -133,18 +133,18 @@ export const Home = () => {
           </ul>
         </div>
       )}
-      {isArticleLoading && (
-        <div className="w-4/5 mx-auto text-center">
-          <div className="skelton-article" />
-        </div>
-      )}
       <div className="w-4/5 mx-auto text-center">
-        {!isArticleLoading &&
+        {!isFetchMoreLoading &&
           data?.user?.articles.pageInfo?.hasNextPage &&
           data?.user?.articles.edges.length !== 0 && (
             <button onClick={handleFetchMore}>もっと見る</button>
           )}
       </div>
+      {loading && (
+        <div className="w-4/5 mx-auto text-center">
+          <div className="skelton-article" />
+        </div>
+      )}
     </main>
   );
 };
