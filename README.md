@@ -1,12 +1,12 @@
-# qiixa
+## qiixa
 
-# graphql
+## graphql
 yarn gen
 
-# bff
+## bff
 yarn dev
 
-# frontend
+## frontend
 yarn dev
 
 browser -> localhost:3000
