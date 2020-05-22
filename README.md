@@ -1,12 +1,15 @@
-## qiixa
+# qiixa
+nextjs + graphql + bff(qiita api)
 
-## graphql
+## development
+### graphql
 yarn gen
 
-## bff
+### bff
 yarn dev
 
-## frontend
+### frontend
 yarn dev
 
+## start
 browser -> localhost:3000
