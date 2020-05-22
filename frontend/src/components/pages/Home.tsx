@@ -12,7 +12,11 @@ const Styled = () => (
 
 export const Home = () => {
   const [user, setUser] = useState("");
-  const { data } = useUserQuery();
+  const { data, refetch } = useUserQuery();
+
+  const onClick = () => {
+    refetch({ id: user });
+  };
   return (
     <main className="w-full my-8">
       <Styled />
@@ -26,7 +30,9 @@ export const Home = () => {
             value={user}
             onChange={(e) => setUser(e.target.value)}
           />
-          <button className="ml-auto">search</button>
+          <button className="ml-auto" onClick={onClick}>
+            search
+          </button>
         </div>
       </div>
       {/* user info */}
