@@ -99,11 +99,13 @@ export const Home = () => {
             ))}
         </ul>
       </div>
-      {!loading && data?.user?.articles.pageInfo?.hasNextPage && (
-        <div className="w-4/5 mx-auto text-center">
-          <button onClick={handleFetchMore}>もっと見る</button>
-        </div>
-      )}
+      {!loading &&
+        data?.user?.articles.pageInfo?.hasNextPage &&
+        data?.user?.articles.edges.length !== 0 && (
+          <div className="w-4/5 mx-auto text-center">
+            <button onClick={handleFetchMore}>もっと見る</button>
+          </div>
+        )}
     </main>
   );
 };
