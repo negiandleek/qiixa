@@ -69,7 +69,7 @@ export const Home = () => {
       {/* user info */}
       <div className="w-4/5 mx-auto my-8">
         {/* done fetch and exists user */}
-        {data && data.user && (
+        {data?.user && (
           <div>
             <figure className="flex items-center">
               <img
@@ -87,18 +87,16 @@ export const Home = () => {
       </div>
       <div className="w-4/5 mx-auto my-8">
         <ul>
-          {data &&
-            data.user?.articles &&
-            data.user.articles.edges.map((article) => (
-              <li className="article-list flex p-4 mb-4" key={article?.node.id}>
-                <p className="truncate w-4/5 m-0">
-                  <a target="blank" href={article?.node.url}>
-                    {article?.node.title}
-                  </a>
-                </p>
-                <span className="ml-auto truncate">stock: 10 </span>
-              </li>
-            ))}
+          {data?.user?.articles.edges.map((article) => (
+            <li className="article-list flex p-4 mb-4" key={article?.node.id}>
+              <p className="truncate w-4/5 m-0">
+                <a target="blank" href={article?.node.url}>
+                  {article?.node.title}
+                </a>
+              </p>
+              <span className="ml-auto truncate">stock: 10 </span>
+            </li>
+          ))}
         </ul>
       </div>
       {!loading &&
