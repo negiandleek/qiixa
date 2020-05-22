@@ -34,6 +34,9 @@ const Styled = () => (
     .article-list{
       background-color: var(--background);
     }
+    .stock{
+      min-width: 88px;
+    }
   `}</style>
 );
 
@@ -120,13 +123,13 @@ export const Home = () => {
           <ul>
             {data?.user?.articles.edges.map((article) => (
               <li className="article-list flex p-4 mb-4" key={article?.node.id}>
-                <p className="truncate w-4/5 m-0">
+                <p className="truncate w-full m-0">
                   <a target="blank" href={article?.node.url}>
                     {article?.node.title}
                   </a>
                 </p>
-                <span className="ml-auto truncate">
-                  {/* stock: {article?.node.stockCounts}{" "} */}
+                <span className="stock ml-auto truncate flex-shrink-0 pl-4">
+                  stock: {article?.node.stockCounts}
                 </span>
               </li>
             ))}

@@ -1,4 +1,4 @@
-query User($id: ID! = "youya66" $first: Int = 2 $after: Int = 1){
+query User($id: ID! = "youya66" $first: Int = 10 $after: Int = 1){
   user(id: $id){
     id
     name
@@ -12,7 +12,7 @@ query User($id: ID! = "youya66" $first: Int = 2 $after: Int = 1){
         node{
           id
           url
-          # stockCounts
+          stockCounts
           title
         }
       }
