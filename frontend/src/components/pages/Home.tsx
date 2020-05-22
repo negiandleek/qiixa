@@ -15,10 +15,36 @@ const Styled = () => (
 
 export const Home = () => {
   const [user, setUser] = useState("");
-  const { data, refetch } = useUserQuery();
+  const [page, setPage] = useState(1);
+  const { loading, data, refetch, fetchMore } = useUserQuery();
 
   const onClick = () => {
     refetch({ id: user });
+  };
+
+  const handleFetchMore = () => {
+    setPage((prev) => prev + 1);
+    fetchMore({
+      variables: {
+        after: page,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        return {
+          ...prev,
+          user: {
+            ...prev.user,
+            articles: {
+              ...prev.user?.articles,
+              edges: [
+                ...(prev?.user?.articles.edges ?? []),
+                ...(fetchMoreResult?.user?.articles.edges ?? []),
+              ],
+              pageInfo: fetchMoreResult?.user?.articles.pageInfo,
+            },
+          },
+        } as any;
+      },
+    });
   };
   return (
     <main className="w-full my-8">
@@ -73,6 +99,11 @@ export const Home = () => {
             ))}
         </ul>
       </div>
+      {!loading && data?.user?.articles.pageInfo?.hasNextPage && (
+        <div className="w-4/5 mx-auto text-center">
+          <button onClick={handleFetchMore}>もっと見る</button>
+        </div>
+      )}
     </main>
   );
 };

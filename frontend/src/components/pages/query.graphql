@@ -1,10 +1,10 @@
-query User($id: ID! = "youya66"){
+query User($id: ID! = "youya66" $first: Int $after: Int){
   user(id: $id){
     id
     name
     profileImage
     description
-    articles{
+    articles(first: $first, after: $after){
       pageInfo{
         hasNextPage
       }

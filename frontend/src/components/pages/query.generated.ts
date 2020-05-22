@@ -6,6 +6,8 @@ import * as ApolloReactHooks from "@apollo/react-hooks";
 
 export type UserQueryVariables = {
   id?: Types.Scalars["ID"];
+  first?: Types.Maybe<Types.Scalars["Int"]>;
+  after?: Types.Maybe<Types.Scalars["Int"]>;
 };
 
 export type UserQuery = { __typename?: "Query" } & {
@@ -34,13 +36,13 @@ export type UserQuery = { __typename?: "Query" } & {
 };
 
 export const UserDocument = gql`
-  query User($id: ID! = "youya66") {
+  query User($id: ID! = "youya66", $first: Int, $after: Int) {
     user(id: $id) {
       id
       name
       profileImage
       description
-      articles {
+      articles(first: $first, after: $after) {
         pageInfo {
           hasNextPage
         }
@@ -69,6 +71,8 @@ export const UserDocument = gql`
  * const { data, loading, error } = useUserQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      first: // value for 'first'
+ *      after: // value for 'after'
  *   },
  * });
  */
