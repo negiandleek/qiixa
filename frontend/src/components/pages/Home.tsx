@@ -45,6 +45,7 @@ export const Home = () => {
   });
 
   const onClick = () => {
+    setPage(0);
     refetch({ id: user });
   };
 
@@ -72,6 +73,10 @@ export const Home = () => {
       },
     });
   };
+
+  const isUserLoading = loading && data?.user?.id !== user;
+  const isArticleLoading = loading;
+
   return (
     <main className="w-full my-8">
       <Styled />
@@ -93,8 +98,8 @@ export const Home = () => {
       {/* user info */}
       <div className="w-4/5 mx-auto my-8">
         {/* done fetch and exists user */}
-        {loading && !data?.user && <div className="skelton-user"></div>}
-        {data?.user && (
+        {isUserLoading && <div className="skelton-user"></div>}
+        {!isUserLoading && data?.user && (
           <div>
             <figure className="flex items-center">
               <img
@@ -110,26 +115,31 @@ export const Home = () => {
           </div>
         )}
       </div>
-      <div className="w-4/5 mx-auto my-8">
-        <ul>
-          {data?.user?.articles.edges.map((article) => (
-            <li className="article-list flex p-4 mb-4" key={article?.node.id}>
-              <p className="truncate w-4/5 m-0">
-                <a target="blank" href={article?.node.url}>
-                  {article?.node.title}
-                </a>
-              </p>
-              <span className="ml-auto truncate">
-                stock: {article?.node.stockCounts}{" "}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {/* users articles */}
+      {!isUserLoading && (
+        <div className="w-4/5 mx-auto my-8">
+          <ul>
+            {data?.user?.articles.edges.map((article) => (
+              <li className="article-list flex p-4 mb-4" key={article?.node.id}>
+                <p className="truncate w-4/5 m-0">
+                  <a target="blank" href={article?.node.url}>
+                    {article?.node.title}
+                  </a>
+                </p>
+                <span className="ml-auto truncate">
+                  {/* stock: {article?.node.stockCounts}{" "} */}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {isArticleLoading && (
+        <div className="w-4/5 mx-auto text-center">
+          <div className="skelton-article" />
+        </div>
+      )}
       <div className="w-4/5 mx-auto text-center">
-        {loading && <div className="skelton-article" />}
-        {!loading &&
+        {!isArticleLoading &&
           data?.user?.articles.pageInfo?.hasNextPage &&
           data?.user?.articles.edges.length !== 0 && (
             <button onClick={handleFetchMore}>もっと見る</button>

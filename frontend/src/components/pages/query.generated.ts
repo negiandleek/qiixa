@@ -25,7 +25,7 @@ export type UserQuery = { __typename?: "Query" } & {
               { __typename?: "ArticleEdge" } & {
                 node: { __typename?: "Article" } & Pick<
                   Types.Article,
-                  "id" | "url" | "stockCounts" | "title"
+                  "id" | "url" | "title"
                 >;
               }
             >
@@ -50,7 +50,6 @@ export const UserDocument = gql`
           node {
             id
             url
-            stockCounts
             title
           }
         }
