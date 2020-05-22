@@ -17,7 +17,7 @@ type ArticleEdge {
 
 type Article implements Node {
   id: ID!
-  title: String
+  title: String!
   url: String
   user: User!
   stockCounts: Int!

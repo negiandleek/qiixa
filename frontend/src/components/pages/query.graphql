@@ -4,5 +4,18 @@ query User($id: ID! = "youya66"){
     name
     profileImage
     description
+    articles{
+      pageInfo{
+        hasNextPage
+      }
+      edges{
+        node{
+          id
+          url
+          # stockCounts
+          title
+        }
+      }
+    }
   }
 }

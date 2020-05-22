@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useUserQuery } from "./query.generated";
 
 const Styled = () => (
-  <style jsx>{`
+  <style>{`
     .profileImage {
       width: 120px;
       height: 120px;
+    }
+    .article-list{
+      background-color: var(--background);
     }
   `}</style>
 );
@@ -53,6 +56,22 @@ export const Home = () => {
             </figure>
           </div>
         )}
+      </div>
+      <div className="w-4/5 mx-auto my-8">
+        <ul>
+          {data &&
+            data.user?.articles &&
+            data.user.articles.edges.map((article) => (
+              <li className="article-list flex p-4 mb-4" key={article?.node.id}>
+                <p className="truncate w-4/5 m-0">
+                  <a target="blank" href={article?.node.url}>
+                    {article?.node.title}
+                  </a>
+                </p>
+                <span className="ml-auto truncate">stock: 10 </span>
+              </li>
+            ))}
+        </ul>
       </div>
     </main>
   );

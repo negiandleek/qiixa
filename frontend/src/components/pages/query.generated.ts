@@ -13,7 +13,23 @@ export type UserQuery = { __typename?: "Query" } & {
     { __typename?: "User" } & Pick<
       Types.User,
       "id" | "name" | "profileImage" | "description"
-    >
+    > & {
+        articles: { __typename?: "ArticleConnection" } & {
+          pageInfo?: Types.Maybe<
+            { __typename?: "PageInfo" } & Pick<Types.PageInfo, "hasNextPage">
+          >;
+          edges: Array<
+            Types.Maybe<
+              { __typename?: "ArticleEdge" } & {
+                node: { __typename?: "Article" } & Pick<
+                  Types.Article,
+                  "id" | "url" | "title"
+                >;
+              }
+            >
+          >;
+        };
+      }
   >;
 };
 
@@ -24,6 +40,18 @@ export const UserDocument = gql`
       name
       profileImage
       description
+      articles {
+        pageInfo {
+          hasNextPage
+        }
+        edges {
+          node {
+            id
+            url
+            title
+          }
+        }
+      }
     }
   }
 `;
