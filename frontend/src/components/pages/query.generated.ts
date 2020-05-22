@@ -25,7 +25,7 @@ export type UserQuery = { __typename?: "Query" } & {
               { __typename?: "ArticleEdge" } & {
                 node: { __typename?: "Article" } & Pick<
                   Types.Article,
-                  "id" | "url" | "title"
+                  "id" | "url" | "stockCounts" | "title"
                 >;
               }
             >
@@ -36,7 +36,7 @@ export type UserQuery = { __typename?: "Query" } & {
 };
 
 export const UserDocument = gql`
-  query User($id: ID! = "youya66", $first: Int, $after: Int) {
+  query User($id: ID! = "youya66", $first: Int = 2, $after: Int = 1) {
     user(id: $id) {
       id
       name
@@ -50,6 +50,7 @@ export const UserDocument = gql`
           node {
             id
             url
+            stockCounts
             title
           }
         }

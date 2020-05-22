@@ -34,7 +34,7 @@ export class Article extends RESTDataSource<any> {
   }
   async getArticlesByUser(
     userId: string,
-    first: number = 2,
+    first: number = 5,
     after: number = 1
   ) {
     const { body, pageInfo } = await this.get(`users/${userId}/items`, {

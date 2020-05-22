@@ -40,7 +40,9 @@ const Styled = () => (
 export const Home = () => {
   const [user, setUser] = useState("");
   const [page, setPage] = useState(1);
-  const { loading, data, refetch, fetchMore } = useUserQuery();
+  const { loading, data, refetch, fetchMore } = useUserQuery({
+    notifyOnNetworkStatusChange: true,
+  });
 
   const onClick = () => {
     refetch({ id: user });
@@ -50,7 +52,7 @@ export const Home = () => {
     setPage((prev) => prev + 1);
     fetchMore({
       variables: {
-        after: page,
+        after: page + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         return {
@@ -117,7 +119,9 @@ export const Home = () => {
                   {article?.node.title}
                 </a>
               </p>
-              <span className="ml-auto truncate">stock: 10 </span>
+              <span className="ml-auto truncate">
+                stock: {article?.node.stockCounts}{" "}
+              </span>
             </li>
           ))}
         </ul>
