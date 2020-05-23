@@ -48,7 +48,7 @@ export const Home = () => {
   });
 
   const onClick = () => {
-    setPage(0);
+    setPage(1);
     refetch({ id: user });
   };
 
@@ -129,7 +129,7 @@ export const Home = () => {
                   </a>
                 </p>
                 <span className="stock ml-auto truncate flex-shrink-0 pl-4">
-                  stock: {article?.node.stockCounts}
+                  {/* stock: {article?.node.stockCounts} */}
                 </span>
               </li>
             ))}
