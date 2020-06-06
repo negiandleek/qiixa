@@ -8,7 +8,7 @@
     "dev": "nodemon"
   },
   "dependencies": {
-    "apollo-server": "^2.13.1",
+    "apollo-server": "^2.14.2",
     "apollo-server-express": "^2.13.1",
     "body-parser": "^1.19.0",
     "cookie-session": "^1.4.0",
